@@ -1,0 +1,23 @@
+#+title: COVID-19 orientation data split
+
+This repository is a ad hoc utility to split a json dump into csv
+files and a zip of the last week csv files.
+
+Set =csv-output-dir= and =zip-output-dir= in [[file:src/core.clj][src/core.clj]].  Make sure
+these directory actually exist.
+
+Then run the tool like this:
+
+: clj -m core /home/user/dump.ndjson
+
+* Support the Clojure(script) ecosystem
+
+If you like Clojure(script), please consider supporting maintainers by
+donating to [[https://www.clojuriststogether.org][clojuriststogether.org]].
+
+* License
+
+2020 Bastien Guerry.
+
+The code source of this repository is published under the [[file:LICENSE][EPL 2.0
+license]].

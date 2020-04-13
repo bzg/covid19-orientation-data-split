@@ -1,0 +1,10 @@
+{:version     "0.1.0"
+ :description "Create csv/zip files from a json dump of specific data."
+ :url         "https://github.com/bzg/covid19-orientation-data-split"
+ :license     {:name "Eclipse Public License - v 2.0"
+               :url  "http://www.eclipse.org/legal/epl-v20.html"}
+ :deps
+ {org.clojure/clojure {:mvn/version "1.10.1"}
+  cheshire            {:mvn/version "5.10.0"}
+  clojure.java-time   {:mvn/version "0.3.2"}}
+ }
