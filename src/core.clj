@@ -20,9 +20,12 @@
 ;; Get the home directory
 (def home-dir (System/getenv "HOME")) 
 
-;; Set the formatting string for csv file names
+;; Set the absolute formatting string for csv file names
 (def csv-fname-fstring
   (str home-dir "/" csv-output-dir "/" "SIG_%s_Anonymous.csv"))
+
+;; Set the formatting string for raw csv file names
+(def csv-fname-nodir-fstring "SIG_%s_Anonymous.csv")
 
 ;; Set the zip file name
 (def zip-fname (format "%s/%s/SIG-orientation-covid19-%s.zip"
@@ -84,10 +87,10 @@
                       immunosuppressant_drug_algo])
          "\n")))
 
-;; Get the last week days
+;; Get the last week days csv file names for later zipping
 (def last-week-days
   (for [n (range 7)]
-    (format csv-fname-fstring
+    (format csv-fname-nodir-fstring
             (t/minus (t/truncate-to (t/local-date-time) :days)
                      (t/days (inc n))))))
 
@@ -118,5 +121,6 @@
 (defn -main [& [input-file]]
   (generate-csv-files)
   (dispatch input-file)
-  (apply shell/sh (flatten ["zip" "-r" zip-fname last-week-days]))
+  (shell/with-sh-dir (str home-dir "/" csv-output-dir)
+    (apply shell/sh (flatten ["zip" "-r" zip-fname last-week-days])))
   (System/exit 0))
